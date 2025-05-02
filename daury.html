@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicios de Hogar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul-transparente: rgba(33, 35, 61, 0.75);
+      --blanco-transparente: rgba(255, 255, 255, 0.85);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+      position: relative;
+      min-height: 100vh;
+      color: white;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: var(--azul-transparente);
+      z-index: 0;
+    }
+
+    header {
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #dcdcdc;
+    }
+
+    .servicios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 50px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .servicio {
+      background: var(--blanco-transparente);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      text-align: center;
+      color: #21233d;
+      border: 2px solid #21233d;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    }
+
+    .servicio:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    }
+
+    .servicio h3 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .servicio p {
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .servicio button {
+      background-color: #21233d;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .servicio button:hover {
+      background-color: #0e0f20;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      border: 3px solid #21233d;
+      position: relative;
+      color: #21233d;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+    }
+
+    .modal-content input,
+    .modal-content textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .modal-content button {
+      background-color: #21233d;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      color: #21233d;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: red;
+    }
+
+    /* Pie de página */
+    footer {
+      background-color: var(--azul-transparente);
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Servicios de Hogar</h1>
+    <p>Expertos en limpieza, fontanería, electricidad y jardinería</p>
+  </header>
+
+  <section class="servicios">
+    <div class="servicio">
+      <h3>Limpieza de Hogar</h3>
+      <p>Mantenemos tu hogar reluciente con limpieza profunda y desinfección profesional.</p>
+      <button onclick="abrirModal()">Agendar Servicio</button>
+    </div>
+    <div class="servicio">
+      <h3>Fontanería</h3>
+      <p>Reparamos fugas, instalamos grifería y mantenemos tus tuberías en óptimo estado.</p>
+      <button onclick="abrirModal()">Agendar Servicio</button>
+    </div>
+    <div class="servicio">
+      <h3>Electricidad</h3>
+      <p>Solucionamos fallos eléctricos, instalamos sistemas de iluminación y seguridad.</p>
+      <button onclick="abrirModal()">Agendar Servicio</button>
+    </div>
+    <div class="servicio">
+      <h3>Jardinería</h3>
+      <p>Creamos y mantenemos jardines hermosos, poda de plantas, césped y diseño exterior.</p>
+      <button onclick="abrirModal()">Agendar Servicio</button>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal" id="modalFormulario">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>Agenda tu Servicio</h2>
+      <form action="https://formsubmit.co/dauryfabian4@gmail.com" method="POST">
+        <input type="text" name="name" placeholder="Nombre completo" required>
+        <input type="email" name="email" placeholder="Correo electrónico" required>
+        <input type="tel" name="phone" placeholder="Número de teléfono" required>
+        <textarea name="address" rows="3" placeholder="Dirección de tu hogar" required></textarea>
+        <input type="hidden" name="_captcha" value="false">
+        <button type="submit">Enviar Solicitud</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function abrirModal() {
+      document.getElementById('modalFormulario').style.display = 'flex';
+    }
+
+    function cerrarModal() {
+      document.getElementById('modalFormulario').style.display = 'none';
+    }
+  </script>
+
+  <!-- Pie de página -->
+  <footer>
+    <p>DAURY</p>
+    <p>Email: <a href="mailto:dauryfabian4@gmail.com">dauryfabian4@gmail.com</a></p>
+    <p>Teléfono: <a href="tel:+18495230377">849-523-0377</a></p>
+  </footer>
+
+</body>
+</html>
+
+
+
